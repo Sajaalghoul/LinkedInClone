@@ -1,0 +1,79 @@
+.LoginHero {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: start;
+  height: 100vh;
+  padding-top: 60px;
+}
+.LoginLeftSide {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin: 50px 30px;
+  margin-left: 150px;
+  gap: 30px;
+}
+
+.LoginTitle {
+  font-size: 50px;
+  color: rgb(0, 0, 0, 0.6);
+}
+
+.GoogleLoginButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  border: 1px solid transparent;
+  border-radius: 35px;
+  padding: 0px 70px;
+  cursor: pointer;
+  color: white;
+  background-color: #0a66c2;
+  gap: 10px;
+  transition-duration: 100ms;
+}
+.GoogleLoginButton:hover {
+  background-color: #408ee0;
+}
+.GoogleIcon {
+  width: 50px;
+  height: 50px;
+}
+.HeroImage {
+  width: 700px;
+  height: 100vh;
+}
+@media only screen and (max-width: 1300px) {
+  .GoogleLoginButton {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .LoginHero {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
+  }
+  .LoginLeftSide {
+    justify-content: center;
+    align-items: center;
+    margin: 50px 20px;
+  }
+  .LoginTitle {
+    font-size: 30px;
+  }
+  .HeroImage {
+    width: 100%;
+    margin: auto;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .LoginHero {
+    padding-top: 20px;
+  }
+}
