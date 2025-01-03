@@ -13,7 +13,7 @@ const Login = () => {
           <button className={styles.GoogleLoginButton}>
             <img
               src="../../assets/images/google_logo_icon.webp"
-              alt="Google Icon"
+              alt="GoogleIcon"
               className={styles.GoogleIcon}
             />
             <p>Continue With Google</p>
