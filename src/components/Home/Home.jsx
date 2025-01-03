@@ -1,11 +1,11 @@
-import Header from "../Header/Header"
-
+import styles from "./Home.module.css";
+import UpWork from "../UpWork/UpWork";
 const Home = () => {
   return (
-    <div>
-      <Header/>
+    <div className={styles.Home}>
+      <UpWork />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

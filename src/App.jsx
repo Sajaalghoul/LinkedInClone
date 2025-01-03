@@ -2,13 +2,12 @@ import { Outlet } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header/Header";
 function App() {
-  return(
+  return (
     <div className="App">
-    <Header/>
-    <Outlet/>
-     </div>
+      <Header />
+      <Outlet />
+    </div>
   );
-
 }
 
 export default App;
