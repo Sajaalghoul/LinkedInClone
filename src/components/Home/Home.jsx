@@ -1,10 +1,18 @@
 import styles from "./Home.module.css";
 import UpWork from "../UpWork/UpWork";
+import HomeLeftSide from "../HomeLeftSide/HomeLeftSide";
+import HomeMain from "../HomeMain/HomeMain";
+import HomeRightSide from "../HomeRightSide/HomeRightSide";
 const Home = () => {
   return (
-    <div className={styles.Home}>
+    <main className={styles.Home}>
       <UpWork />
-    </div>
+      <div className={styles.Layout}>
+        <HomeLeftSide/>
+        <HomeMain/>
+        <HomeRightSide/>
+      </div>
+    </main>
   );
 };
 

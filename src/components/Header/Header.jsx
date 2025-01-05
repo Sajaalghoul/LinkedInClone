@@ -1,6 +1,6 @@
 import styles from "./Header.module.css";
 import navigatores from "../../navigatores";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 const Header = () => {
   const [signOut, setsignOut] = useState(false);
@@ -35,11 +35,13 @@ const Header = () => {
   return (
     <header className={styles.haeder}>
       <div className={styles.headerMain}>
-        <img
-          src="../../assets/images/home-logo.svg"
-          alt="HeaderLogo"
-          className={styles.HeaderLogo}
-        />
+        <Link to="/home">
+          <img
+            src="../../assets/images/home-logo.svg"
+            alt="HeaderLogo"
+            className={styles.HeaderLogo}
+          />
+        </Link>
         <form className={styles.Search}>
           <img src="../../assets/images/search-icon.svg" alt="SearchLogo" />
           <input
