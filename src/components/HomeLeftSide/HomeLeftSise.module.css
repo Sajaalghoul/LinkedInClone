@@ -1,3 +1,115 @@
 .LeftSide {
-  background-color: aqua;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.UserCard {
+  background-color: white;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #dfdeda;
+  width: 220px;
+  border-radius: 10px;
+  padding: 0;
+}
+.universityImg {
+  width: 20px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+hr {
+  width: 100%;
+  height: 1px;
+  background: #dfdeda;
+  width: 90%;
+}
+.viewrsAndImpressions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 15px 0px;
+  font-size: 10px;
+}
+.viewrsAndImpressionsLink {
+  text-decoration: none;
+  display: flex;
+  margin: 3px;
+  width: 180px;
+  justify-content: space-between;
+}
+.LinkTitle {
+  padding-left: 0px;
+  color: black;
+  font-weight: 600;
+}
+.LinkNumber {
+  color: #4289d0;
+}
+.viewrsAndImpressionsLink:hover {
+  text-decoration: underline;
+}
+
+.PremiumSection {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0px;
+  font-size: 12px;
+  gap:10px;
+}
+.PremiumTitle {
+  color: gray;
+  margin-right: 30px;
+}
+.PremiumLink{
+  display: flex;
+  align-items: cenetr;
+  justify-content: cenetr;
+  gap:5px;
+  text-decoration: none;
+  color:black;
+}
+.PremiumLink:hover{
+  text-decoration: underline;
+}
+.PremiumLinkTitle{
+  margin:  auto 0px;
+}
+.HomeLeftSideLinks{
+  background-color: white;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #dfdeda;
+  width: 220px;
+  border-radius: 10px;
+  padding: 15px 0px 20px;
+  gap:15px;
+}
+.Links{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin: 0px;
+  gap: 0px;
+  width:170px;
+}
+.LinksTitle{
+  padding-left: 10px;
+  text-decoration: none;
+  color:black;
+  font-size: 12px;
+}
+.LinksIcon{
+  width: 17px;
+}
+.Links:hover{
+  text-decoration: underline;
+}
+@media only screen and (max-width: 600px) {
+  .LeftSide {
+    justify-content: cenetr;
+    align-items: center;
+  }
 }

@@ -1,0 +1,56 @@
+.UserCardInfo {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  text-decoration: none;
+  color: black;
+}
+.CardBackground {
+  width: 100%;
+  height: 60px;
+  border: 1px solid transparent;
+  border-radius: 10px 10px 0 0;
+}
+.UserImg {
+  width: 60px;
+  border: 1px solid white;
+  margin: 1px auto;
+  position: absolute;
+  top: 31px;
+  left: 18%;
+  border-radius: 30px;
+}
+
+.InfoDetails {
+  display: flex;
+  flex-direction: column;
+  margin: 50px 15px 5px;
+  gap: 5px;
+}
+.Name {
+  font-size: 20px;
+}
+.country,
+.University,
+.specialization {
+  font-size: 12px;
+}
+.country {
+  color: gray;
+}
+.universitySection {
+  display: flex;
+  justify-content: cenetr;
+  align-items: center;
+  gap: 5px;
+}
+.universityImg {
+  width: 20px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+.University {
+  font-weight: 550;
+}

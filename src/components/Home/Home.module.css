@@ -1,20 +1,25 @@
 .Home {
   display: flex;
   flex-direction: column;
-  padding: 40px 100px;
   gap: 25px;
   height: 100%;
-  background-color: #f3f4f6;
+  background-color: #F4F2EE;
+  padding: 40px 180px 0px;
 }
 .Layout {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows: auto;
-  gap: 1rem;
+  gap: 2rem;
   height: 100vh;
 }
 @media only screen and (max-width: 1000px) {
   .Home {
     padding: 40px 50px;
+  }
+  .Layout{
+    display: flex;
+    flex-direction: column;
+
   }
 }

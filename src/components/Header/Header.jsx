@@ -46,7 +46,7 @@ const Header = () => {
           <img src="../../assets/images/search-icon.svg" alt="SearchLogo" />
           <input
             type="text"
-            placeholder="Search Your Job"
+            placeholder="Search"
             className={styles.SearchInput}
           />
         </form>
@@ -85,11 +85,12 @@ const Header = () => {
                 alt="UserDown"
                 className={styles.downIcon}
               />
-              <p>Work</p>
+              <p>For Business</p>
             </div>
           </li>
         </ul>
       </nav>
+      
     </header>
   );
 };
