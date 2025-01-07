@@ -3,7 +3,6 @@
   flex-direction: column;
   gap: 25px;
   height: 100%;
-  background-color: #F4F2EE;
   padding: 40px 180px 0px;
 }
 .Layout {
@@ -20,6 +19,7 @@
   .Layout{
     display: flex;
     flex-direction: column;
-
+    gap:20px;
+    height: 100%;
   }
 }

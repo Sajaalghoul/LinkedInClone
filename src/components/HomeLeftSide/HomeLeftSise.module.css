@@ -2,16 +2,22 @@
   background-color: transparent;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 10px;
 }
 .UserCard {
   background-color: white;
-  align-items: center;
   display: flex;
+  align-items: center;
   flex-direction: column;
   border: 1px solid #dfdeda;
   width: 220px;
   border-radius: 10px;
+  padding: 0;
+}
+.UserCardPart {
+  display: flex;
+  flex-direction: column;
   padding: 0;
 }
 .universityImg {
@@ -36,7 +42,7 @@ hr {
   text-decoration: none;
   display: flex;
   margin: 3px;
-  width: 180px;
+  width: 170px;
   justify-content: space-between;
 }
 .LinkTitle {
@@ -56,27 +62,27 @@ hr {
   flex-direction: column;
   margin: 15px 0px;
   font-size: 12px;
-  gap:10px;
+  gap: 10px;
 }
 .PremiumTitle {
   color: gray;
   margin-right: 30px;
 }
-.PremiumLink{
+.PremiumLink {
   display: flex;
   align-items: cenetr;
   justify-content: cenetr;
-  gap:5px;
+  gap: 5px;
   text-decoration: none;
-  color:black;
+  color: black;
 }
-.PremiumLink:hover{
+.PremiumLink:hover {
   text-decoration: underline;
 }
-.PremiumLinkTitle{
-  margin:  auto 0px;
+.PremiumLinkTitle {
+  margin: auto 0px;
 }
-.HomeLeftSideLinks{
+.HomeLeftSideLinks {
   background-color: white;
   align-items: center;
   display: flex;
@@ -85,31 +91,60 @@ hr {
   width: 220px;
   border-radius: 10px;
   padding: 15px 0px 20px;
-  gap:15px;
+  gap: 15px;
 }
-.Links{
+.Links {
   display: flex;
   align-items: center;
   text-decoration: none;
   margin: 0px;
   gap: 0px;
-  width:170px;
+  width: 170px;
 }
-.LinksTitle{
+.LinksTitle {
   padding-left: 10px;
   text-decoration: none;
-  color:black;
+  color: black;
   font-size: 12px;
 }
-.LinksIcon{
+.LinksIcon {
   width: 17px;
 }
-.Links:hover{
+.Links:hover {
   text-decoration: underline;
 }
+.ShowMoreButton {
+  cursor: pointer;
+  width: 90%;
+  color: gray;
+  display: none;
+}
+.ShowMoreButton:hover {
+  color: black;
+  background-color: rgb(231, 228, 228);
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
 @media only screen and (max-width: 600px) {
   .LeftSide {
     justify-content: cenetr;
     align-items: center;
+  }
+
+  .UserCard,
+  .HomeLeftSideLinks {
+    width: 90%;
+  }
+  .UserCardPart {
+    width: 100%;
+    padding: 10px;
+  }
+  .HomeLeftSideLinks {
+    align-items: start;
+    padding-left: 20px;
+  }
+  .ShowMoreButton {
+    display: block;
   }
 }

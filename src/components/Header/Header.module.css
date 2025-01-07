@@ -1,7 +1,7 @@
 .haeder {
   background-color: white;
   display: flex;
-  padding: 0px 200px ;
+  padding: 0px 200px;
   justify-content: space-between;
   align-items: center;
   width: 100%;
@@ -20,7 +20,7 @@
   border: 1px solid transparent;
   padding: 7px 20px;
   border-radius: 5px;
-  background-color: #EDF3F8;
+  background-color: #edf3f8;
   height: 100%;
 }
 .SearchInput {
@@ -98,8 +98,8 @@
 }
 
 @media only screen and (max-width: 1000px) {
-  .haeder{
-    padding:5px 100px;
+  .haeder {
+    padding: 5px 100px;
   }
   .HeaderNav {
     position: fixed;
@@ -137,8 +137,8 @@
   }
 }
 @media only screen and (max-width: 450px) {
-  .haeder{
-    padding:0px 2000px;
+  .haeder {
+    padding: 0px 2000px;
   }
   .NavItem {
     padding: 5px 5px;

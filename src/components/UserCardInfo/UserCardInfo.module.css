@@ -54,3 +54,9 @@
 .University {
   font-weight: 550;
 }
+
+@media only screen and (max-width: 600px) {
+  .UserCardInfo{
+   width: 100%;
+  }
+}
