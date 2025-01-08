@@ -1,3 +1,50 @@
-.HomeRightSide{
-    /* background-color: red;*/
-} 
+.HomeRightSide {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.feedAdd {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #dfdeda;
+  width: 300px;
+  border-radius: 10px;
+  padding: 10px 10px;
+}
+.feedAddUpper {
+  display: flex;
+  justify-content: space-between;
+  gap: 100px;
+  padding-left: 5px;
+}
+.feedEexclamation:hover {
+  cursor: pointer;
+}
+.viewRecommindation {
+  color: gray;
+  text-decoration: none;
+  display: flex;
+  gap: 10px;
+  width: 80%;
+  margin: 15px 5px 5px;
+  padding: 2px;
+}
+.viewRecommindation:hover {
+  background-color: rgb(212, 210, 210);
+  color: black;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+.arrow {
+  width: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .HomeRightSide {
+    align-items: center;
+  }
+  .feedAdd {
+    width: 90%;
+  }
+}

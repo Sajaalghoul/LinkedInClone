@@ -1,0 +1,36 @@
+.feedSuggetion {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 15px;
+}
+.feedImg {
+  width: 60px;
+  height: 60%;
+}
+.feedSuggetionDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 5px;
+  padding-top: 15px;
+}
+.DetailsTitle {
+  font-weight: 540;
+}
+.DetailsMore {
+  color: rgb(182, 182, 182);
+  font-size: 13px;
+}
+.FollowButton {
+  box-sizing: border-box;
+  border: 1px solid black;
+  padding: 5px 20px;
+  border-radius: 15px;
+}
+.FollowButton:hover {
+  cursor: pointer;
+  background-color: rgb(203, 201, 201);
+  border: 2px solid black;
+  padding: 4px 19px;
+}

@@ -4,6 +4,7 @@
   gap: 25px;
   height: 100%;
   padding: 40px 180px 0px;
+  margin-bottom: 50px;
 }
 .Layout {
   display: grid;
