@@ -1,21 +1,26 @@
 import styles from "./FeedSuggetion.module.css";
-const FeedSuggetion = () => {
+import PropTypes from "prop-types";
+const FeedSuggetion = (props) => {
   return (
     <div className={styles.feedSuggetion}>
       <img
-        src="../../assets/images/google_logo_icon.webp"
+        src={`../../assets/images/${props.image}`}
         alt="feedSuggetionImage"
         className={styles.feedImg}
       />
       <div className={styles.feedSuggetionDetails}>
-        <p className={styles.DetailsTitle}>Google for developers</p>
-        <p className={styles.DetailsMore}>
-          Company-Technology.informaton and Internet
-        </p>
+        <p className={styles.DetailsTitle}>{props.title}</p>
+        <p className={styles.DetailsMore}>{props.details}</p>
         <button className={styles.FollowButton}>+Follow</button>
       </div>
     </div>
   );
+};
+
+FeedSuggetion.propTypes = {
+  title: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
+  details: PropTypes.string.isRequired,
 };
 
 export default FeedSuggetion;

@@ -15,9 +15,21 @@ const HomeRightSide = () => {
             className={styles.feedEexclamation}
           />
         </div>
-        <FeedSuggetion />
-        <FeedSuggetion />
-        <FeedSuggetion />
+        <FeedSuggetion
+          title="google_logo_icon.webp"
+          details=" Company-Technology.informaton and Internet"
+          image="google_logo_icon.webp"
+        />
+        <FeedSuggetion
+          title="google_logo_icon.webp"
+          details=" Company-Technology.informaton and Internet"
+          image="google_logo_icon.webp"
+        />
+        <FeedSuggetion
+          title="google_logo_icon.webp"
+          details=" Company-Technology.informaton and Internet"
+          image="google_logo_icon.webp"
+        />
         <Link to="/user" className={styles.viewRecommindation}>
           <p>view all recommindation</p>
           <img
@@ -28,7 +40,7 @@ const HomeRightSide = () => {
         </Link>
       </section>
       <DailyGames />
-      <RightSideFooter/>
+      <RightSideFooter />
     </aside>
   );
 };

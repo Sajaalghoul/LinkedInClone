@@ -11,45 +11,9 @@
   padding: 15px 10px 5px;
   font-weight: bold;
 }
-.game {
-  display: flex;
-  padding: 5px 15px;
-  align-items: center;
-}
-.game:hover {
-  cursor: pointer;
-  background-color: rgb(219, 217, 217);
-}
-.gameDetails {
-  margin-left: 10px;
-}
 
-.gameImage {
-  width: 35px;
-  height: 90%;
-  border: 1px solid black;
-  border-radius: 5px;
-}
-.GameArrow {
-  width: 12px;
-  height: 40%;
-  margin-left: 90px;
-}
-.gameDetails {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-.DetailsMore {
-  font-size: 12px;
-  color: rgb(122, 121, 121);
-}
 @media only screen and (max-width: 600px) {
   .dailyGames {
     width: 90%;
- 
-  }
-  .game{
-    padding-left: 20px;
   }
 }
