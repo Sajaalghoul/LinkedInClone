@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import FeedSuggetion from "../FeedSuggetion/FeedSuggetion";
 import styles from "./HomeRightSide.module.css";
-// import RightSideFooter from "../RightSideFooter/RightSideFooter";
+import RightSideFooter from "../RightSideFooter/RightSideFooter";
 import DailyGames from "../DailyGames/DailyGames";
 const HomeRightSide = () => {
   return (
-    <div className={styles.HomeRightSide}>
+    <aside className={styles.HomeRightSide}>
       <section className={styles.feedAdd}>
         <div className={styles.feedAddUpper}>
           <p className={styles.feedTitle}>Add To Your Feed</p>
@@ -28,7 +28,8 @@ const HomeRightSide = () => {
         </Link>
       </section>
       <DailyGames />
-    </div>
+      <RightSideFooter/>
+    </aside>
   );
 };
 

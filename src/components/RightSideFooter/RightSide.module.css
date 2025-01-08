@@ -1,5 +1,53 @@
-.hiringPiicture{
-    width:100%;
-    border:1px solid transparent;
-    border-radius: 5px;
+.footer {
+  display: flex;
+  flex-direction: column;
+  
+}
+.hiringPiicture {
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+.hiringPiicture:hover {
+  cursor: pointer;
+}
+.FooterLinks {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 3px;
+  flex-wrap: wrap;
+  padding: 30px 35px 5px;
+  background-color: transparent;
+  font-size: 14px;
+}
+.Link {
+  text-decoration: none;
+  color: gray;
+}
+.Link:hover {
+  text-decoration: underline;
+  color: #0a66c2;
+}
+.FooterLinkedinLogo {
+  width: 80px;
+  height: 100%;
+}
+.footerDetails {
+  display: flex;
+  align-items: center;
+}
+@media only screen and (max-width: 600px) {
+  .footer {
+    align-items: center;
+  }
+  .hiringPiicture {
+    width: 90%;
+  }
+  .FooterLinks {
+    padding: 20px;
+  }
+  .footerDetailsMore{
+    font-size: 15px;
+  }
 }

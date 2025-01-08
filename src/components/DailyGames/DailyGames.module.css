@@ -5,7 +5,7 @@
   border: 1px solid #dfdeda;
   width: 300px;
   border-radius: 10px;
-  padding:5px 0px 0px;
+  padding: 5px 0px 0px;
 }
 .gamesTitle {
   padding: 15px 10px 5px;
@@ -13,10 +13,10 @@
 }
 .game {
   display: flex;
-  padding:5px 15px;
+  padding: 5px 15px;
   align-items: center;
 }
-.game:hover{
+.game:hover {
   cursor: pointer;
   background-color: rgb(219, 217, 217);
 }
@@ -26,7 +26,7 @@
 
 .gameImage {
   width: 35px;
-  height:90%;
+  height: 90%;
   border: 1px solid black;
   border-radius: 5px;
 }
@@ -35,12 +35,21 @@
   height: 40%;
   margin-left: 90px;
 }
-.gameDetails{
+.gameDetails {
   display: flex;
   flex-direction: column;
-  gap:2px;
+  gap: 2px;
 }
-.DetailsMore{
+.DetailsMore {
   font-size: 12px;
   color: rgb(122, 121, 121);
+}
+@media only screen and (max-width: 600px) {
+  .dailyGames {
+    width: 90%;
+ 
+  }
+  .game{
+    padding-left: 20px;
+  }
 }
