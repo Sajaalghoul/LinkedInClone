@@ -16,17 +16,17 @@ const HomeRightSide = () => {
           />
         </div>
         <FeedSuggetion
-          title="google_logo_icon.webp"
+          title="Google Development"
           details=" Company-Technology.informaton and Internet"
           image="google_logo_icon.webp"
         />
         <FeedSuggetion
-          title="google_logo_icon.webp"
+          title="Google Development"
           details=" Company-Technology.informaton and Internet"
           image="google_logo_icon.webp"
         />
         <FeedSuggetion
-          title="google_logo_icon.webp"
+          title="Google Development"
           details=" Company-Technology.informaton and Internet"
           image="google_logo_icon.webp"
         />
