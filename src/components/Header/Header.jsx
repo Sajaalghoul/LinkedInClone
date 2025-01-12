@@ -2,8 +2,19 @@ import styles from "./Header.module.css";
 import navigatores from "../../navigatores";
 import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
+import { auth } from "../../config/firebase"; // Adjust the path based on your file structure
+import { signOut } from "firebase/auth";
+
 const Header = () => {
-  const [signOut, setsignOut] = useState(false);
+  const [isSignOut, setIsSignOut] = useState(false);
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      alert("User signed out successfully");
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
 
   //   render navigators
   const renderNavItems = () =>
@@ -26,11 +37,15 @@ const Header = () => {
     ));
   // MeClick to show signout
   const toggleSignOut = () => {
-    setsignOut((previous) => !previous);
+    setIsSignOut((previous) => !previous);
   };
   //   render signout
   const renderSignOut = () =>
-    signOut && <div className={styles.Signout}>SignOut</div>;
+    isSignOut && (
+      <div className={styles.Signout} onClick={handleSignOut}>
+        SignOut
+      </div>
+    );
 
   return (
     <header className={styles.haeder}>
@@ -90,7 +105,6 @@ const Header = () => {
           </li>
         </ul>
       </nav>
-      
     </header>
   );
 };

@@ -51,7 +51,17 @@
   background-color: #dfdeda;
   border-radius: 10px;
 }
-.userDetails:hover{
+.userDetails:hover {
   cursor: pointer;
   background-color: #dfdeda;
+}
+@media only screen and (max-width: 600px) {
+  .shareBox {
+    align-items: center;
+    width: 90%;
+    padding: 15px 0px 2px;
+  }
+  .shareBoxUpper {
+    align-items: start;
+  }
 }

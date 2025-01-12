@@ -1,0 +1,30 @@
+.articleActionsNumber {
+  display: flex;
+  padding: 0px 20px;
+  color: gray;
+}
+.reactionsNumber {
+  margin-right: auto;
+}
+.articleActionsNumber > p:hover {
+  cursor: pointer;
+  color: #0a66c2;
+  text-decoration: underline;
+}
+.articlActions {
+  display: flex;
+  justify-content: space-around;
+}
+.Action {
+  display: flex;
+  gap: 2px;
+  padding: 10px;
+}
+.Action:hover {
+  background-color: rgb(216, 215, 215);
+  cursor: pointer;
+  border-radius: 5px;
+}
+.ActionImage {
+  width: 20px;
+}
