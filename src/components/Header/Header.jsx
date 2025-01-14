@@ -1,22 +1,28 @@
 import styles from "./Header.module.css";
 import navigatores from "../../navigatores";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { auth } from "../../config/firebase"; // Adjust the path based on your file structure
+import { auth } from "../../config/firebase";
 import { signOut } from "firebase/auth";
+import { setUser } from "../../state/User/UserSlice";
+import { useDispatch } from "react-redux";
+import withAuth from "../../HOC/withAuth";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [isSignOut, setIsSignOut] = useState(false);
   const handleSignOut = async () => {
     try {
       await signOut(auth);
+      dispatch(setUser(null));
+      navigate("/");
       alert("User signed out successfully");
     } catch (error) {
-      console.error("Error signing out:", error);
+      alert("Error signing out:", error);
     }
   };
-
-  //   render navigators
+  // render navigators
   const renderNavItems = () =>
     navigatores.map((navigator) => (
       <li key={navigator.name}>
@@ -109,4 +115,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default withAuth(Header);

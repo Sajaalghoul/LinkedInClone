@@ -1,17 +1,29 @@
 import LoginNav from "../LoginNav/LoginNav";
 import styles from "./Login.module.css";
-4;
+import { useDispatch } from "react-redux";
+import { setUser } from "../../state/User/UserSlice";
 import { auth, googleProvider } from "../../config/firebase";
-
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const signInWithGoogle = async () => {
     try {
-      await signInWithPopup(auth, googleProvider);
+      await signOut(auth);
+      const result = await signInWithPopup(auth, googleProvider);
+      const userData = {
+        uid: result.user.uid,
+        email: result.user.email,
+        displayName: result.user.displayName,
+        photoURL: result.user.photoURL,
+      };
+      dispatch(setUser(userData));
+      navigate("/home");
       alert("Signed in successfully with Google");
     } catch (error) {
-      console.error("Error signing in with Google", error);
+      alert("Error signing in with Google", error);
     }
   };
   return (
