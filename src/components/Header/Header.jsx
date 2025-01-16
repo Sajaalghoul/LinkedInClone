@@ -7,11 +7,13 @@ import { signOut } from "firebase/auth";
 import { setUser } from "../../state/User/UserSlice";
 import { useDispatch } from "react-redux";
 import withAuth from "../../HOC/withAuth";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isSignOut, setIsSignOut] = useState(false);
+  const user = useSelector((state) => state.user.user);
   const handleSignOut = async () => {
     try {
       await signOut(auth);
@@ -77,7 +79,7 @@ const Header = () => {
           {renderNavItems()}
           <li className={styles.NavDownItem}>
             <img
-              src="../../assets/images/user.svg"
+              src={user?.photoURL}
               alt="user"
               className={styles.userImage}
             />

@@ -13,15 +13,7 @@
   border: 1px solid transparent;
   border-radius: 10px 10px 0 0;
 }
-.UserImg {
-  width: 60px;
-  border: 1px solid white;
-  margin: 1px auto;
-  position: absolute;
-  top: 31px;
-  left: 18%;
-  border-radius: 30px;
-}
+
 
 .InfoDetails {
   display: flex;

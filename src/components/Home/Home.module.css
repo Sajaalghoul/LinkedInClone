@@ -1,7 +1,7 @@
 .Home {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 10px;
   height: 100%;
   padding: 40px 180px 200px;
   margin-bottom: 50px;
@@ -13,7 +13,10 @@
   grid-template-rows: auto;
   gap: 2rem;
   height: 100%;
+  padding-top: 10px;
 }
+
+
 @media only screen and (max-width: 1000px) {
   .Home {
     padding: 40px 50px;
