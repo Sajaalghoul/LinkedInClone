@@ -1,10 +1,10 @@
 .footer {
   display: flex;
   flex-direction: column;
-  
+  margin-left: 30px;
 }
-.hiringPiicture {
-  width: 100%;
+.hiringPicture {
+  width: 200px;
   border: 1px solid transparent;
   border-radius: 5px;
 }
@@ -37,17 +37,19 @@
   display: flex;
   align-items: center;
 }
-@media only screen and (max-width: 600px) {
+
+@media only screen and (max-width: 1600px) {
   .footer {
     align-items: center;
   }
   .hiringPiicture {
-    width: 90%;
+    width: 30%;
+    margin-left: -22px;
   }
   .FooterLinks {
-    padding: 20px;
+    padding: 50px ;
   }
-  .footerDetailsMore{
+  .footerDetailsMore {
     font-size: 15px;
   }
 }

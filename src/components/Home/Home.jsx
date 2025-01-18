@@ -6,9 +6,11 @@ const Home = () => {
   return (
     <main className={styles.Home}>
       <div className={styles.Layout}>
-        <HomeLeftSide/>
-        <HomeMain/>
-        <HomeRightSide/>
+        <HomeLeftSide />
+        <div className={styles.HomeMainRight}>
+          <HomeMain />
+          <HomeRightSide />
+        </div>
       </div>
     </main>
   );

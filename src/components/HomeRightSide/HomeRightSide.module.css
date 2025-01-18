@@ -1,7 +1,10 @@
 .HomeRightSide {
+  width: 350px;
+  height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  gap: 20px;
 }
 .feedAdd {
   background-color: white;
@@ -39,12 +42,22 @@
 .arrow {
   width: 20px;
 }
-
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1300px) {
   .HomeRightSide {
     align-items: center;
+    margin-left: 150px;
+    width: 100%;
   }
-  .feedAdd {
-    width: 90%;
+}
+@media only screen and (max-width: 1000px) {
+  .HomeRightSide {
+    align-items: center;
+    margin-left: 20px;
+  }
+}
+@media only screen and (max-width: 700px) {
+  .HomeRightSide {
+    align-items: center;
+    margin-left: 30px;
   }
 }

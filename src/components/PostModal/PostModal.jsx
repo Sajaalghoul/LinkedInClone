@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./PostModal.module.css";
+
 import { useSelector } from "react-redux";
 const PostModal = ({ handleModal }) => {
   const user = useSelector((state) => state.user.user);
+  const [editorText, setEditorText] = useState("");
+  const handleEditorText = (e) => {
+    const value = e.target.value;
+    setEditorText(value);
+  };
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const imageUrl = reader.result;
+        setEditorText((prev) => prev + ` <img src="${imageUrl}" alt="img" /> `);
+      };
+    }
+  };
   return (
     <div className={styles.PostModal}>
       <div className={styles.PostModalContent}>
@@ -26,20 +43,35 @@ const PostModal = ({ handleModal }) => {
           />
         </header>
         <textarea
+          value={editorText}
+          onChange={handleEditorText}
           placeholder="What do you want to talk about?"
           className="h-32 resize-none mb-44"
+          autoFocus={true}
         />
         <div className="flex items-center gap-4 pl-2">
-          <img
-            src="../../assets/images/picture.svg"
-            alt="photoAddIcon"
-            className="w-4 cursor-pointer"
-          />
-          <img
-            src="../../assets/images/video.svg"
-            alt="videoAddIcon"
-            className="w-6  cursor-pointer"
-          />
+          <div className="flex items-center gap-4 pl-2">
+            <input
+              type="file"
+              id="file"
+              name="image"
+              accept="image/png, image/jpeg, image/gif"
+              onChange={handleImageUpload}
+              className={styles.hiddenFileInput}
+            />
+            <label htmlFor="file" className="cursor-pointer">
+              <img
+                src="../../assets/images/picture.svg"
+                alt="photoAddIcon"
+                className="w-4"
+              />
+            </label>
+            <img
+              src="../../assets/images/video.svg"
+              alt="videoAddIcon"
+              className="w-6 cursor-pointer"
+            />
+          </div>
           <img
             src="../../assets/images/plus.svg"
             alt="plusAddIcon"
@@ -47,7 +79,12 @@ const PostModal = ({ handleModal }) => {
           />
         </div>
         <div className="flex justify-end border-t-2 pt-2">
-          <button className="text-white bg-blue-500 font-bold border p-3 rounded-3xl disabled:gray">
+          <button
+            className={`text-white bg-blue-500 font-bold border p-3 rounded-3xl disabled:gray ${
+              editorText ? "bg-blue-500" : "bg-gray-300"
+            }`}
+            disabled={!editorText}
+          >
             Post
           </button>
         </div>

@@ -12,8 +12,10 @@ const LoginNav = () => {
         />
       </Link>
       <div className={styles.NavButtons}>
-        <a className={styles.JoinNow}>Join Now</a>
-        <button className={styles.signInButton}>Sign in</button>
+        <a className={styles.JoinNow}>  <Link to="/joinNow">Join Now</Link></a>
+        <button className={styles.signInButton}>
+          <Link to="/signin">Sign in</Link>
+        </button>
       </div>
     </div>
   );

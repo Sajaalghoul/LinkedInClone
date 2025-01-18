@@ -24,7 +24,7 @@ const HomeLeftSide = () => {
   }, []);
 
   return (
-    <div className={styles.LeftSide}>
+    <div className={styles.HomeLeftSide}>
       {/* user Card */}
       <section className={styles.UserCard}>
         <UserCardInfo />

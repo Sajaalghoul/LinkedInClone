@@ -1,13 +1,25 @@
 .HomeMain {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  width:600px;
-  gap: 10px;
+  gap: 20px;
+  width: calc(100% - 900px);
+  margin-left: 400px;
 }
-
+@media only screen and (max-width: 1300px) {
+  .HomeMain {
+    width: calc(100% - 600px);
+    margin-left: 450px;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .HomeMain {
+    width: calc(100% - 100px);
+    margin-left: 70px;
+  }
+}
 @media only screen and (max-width: 600px) {
   .HomeMain {
-    align-items:center;
+    width: calc(100% - 10px);
+    margin-left: 40px;
   }
 }

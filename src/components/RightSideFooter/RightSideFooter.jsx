@@ -2,11 +2,11 @@ import styles from "./RightSide.module.css";
 const RightSideFooter = () => {
   return (
     <footer className={styles.footer}>
-      <img
-        src="../../assets/images/hiring.png"
-        alt="HiringPiicture"
-        className={styles.hiringPiicture}
-      />
+        <img
+          src="../../assets/images/hiring.png"
+          alt="HiringPiicture"
+          className={styles.hiringPicture}
+        />
       <div className={styles.FooterLinks}>
         <a href="" className={styles.Link}>
           About
@@ -42,6 +42,7 @@ const RightSideFooter = () => {
           alt="FooterLinkedin"
           className={styles.FooterLinkedinLogo}
         />
+
         <p className={styles.footerDetailsMore}>LinkedIn Corporation @ 2025</p>
       </div>
     </footer>

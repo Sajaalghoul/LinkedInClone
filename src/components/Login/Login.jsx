@@ -2,17 +2,15 @@ import LoginNav from "../LoginNav/LoginNav";
 import styles from "./Login.module.css";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../state/User/UserSlice";
-import { auth, googleProvider } from "../../config/firebase";
-import { signInWithPopup, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { signInWithGoogle } from "../../APIS/AuthApi";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const signInWithGoogle = async () => {
+  const handleGoogle = async () => {
     try {
-      await signOut(auth);
-      const result = await signInWithPopup(auth, googleProvider);
+      const result = await signInWithGoogle();
       const userData = {
         uid: result.user.uid,
         email: result.user.email,
@@ -34,10 +32,7 @@ const Login = () => {
           <h1 className={styles.LoginTitle}>
             Welcome To Your Professioanl Community
           </h1>
-          <button
-            className={styles.GoogleLoginButton}
-            onClick={signInWithGoogle}
-          >
+          <button className={styles.GoogleLoginButton} onClick={handleGoogle}>
             <img
               src="../../assets/images/google_logo_icon.webp"
               alt="GoogleIcon"
