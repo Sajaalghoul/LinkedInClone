@@ -11,7 +11,7 @@ const UserCardInfo = () => {
         src="../../assets/images/card-bg.svg"
         alt="cardBackground"
       />
-      <UserImage image={user?.photoURL} style={{width: "60px"}} />
+      <UserImage image={user?.photoURL || "../../assets/images/user.svg"} style={{width: "60px"}} />
       <div className={styles.InfoDetails}>
         <h2 className={styles.Name}>{user?.displayName}</h2>
         <p className={styles.specialization}>

@@ -2,12 +2,11 @@ import styles from "./Header.module.css";
 import navigatores from "../../navigatores";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { auth } from "../../config/firebase";
-import { signOut } from "firebase/auth";
 import { setUser } from "../../state/User/UserSlice";
 import { useDispatch } from "react-redux";
 import withAuth from "../../HOC/withAuth";
 import { useSelector } from "react-redux";
+import { signOutUser } from "../../APIS/AuthApi";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -16,7 +15,7 @@ const Header = () => {
   const user = useSelector((state) => state.user.user);
   const handleSignOut = async () => {
     try {
-      await signOut(auth);
+      await signOutUser();
       dispatch(setUser(null));
       navigate("/");
       alert("User signed out successfully");
@@ -79,7 +78,7 @@ const Header = () => {
           {renderNavItems()}
           <li className={styles.NavDownItem}>
             <img
-              src={user?.photoURL}
+              src={user?.photoURL || "../../assets/images/user.svg"}
               alt="user"
               className={styles.userImage}
             />

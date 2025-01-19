@@ -4,6 +4,7 @@ import { signInWithEmail } from "../../APIS/AuthApi";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../state/User/UserSlice";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 
 const SignIn = () => {
   const [credintials, setCredintials] = useState({ email: "", password: "" });
@@ -16,15 +17,40 @@ const SignIn = () => {
         credintials.email,
         credintials.password
       );
-      navigate("/home");
+
+      toast.success("Signed in successfully", {
+        onClose: () => navigate("/home"),
+      });
       dispatch(setUser({ ...result.user }));
       console.log(result);
     } catch (error) {
+      let errorMessage =
+        "Error signing in. Please check your email and password.";
+      if (error.code) {
+        switch (error.code) {
+          case "auth/invalid-email":
+            errorMessage = "Invalid email address.";
+            break;
+          case "auth/user-disabled":
+            errorMessage = "User account is disabled.";
+            break;
+          case "auth/user-not-found":
+            errorMessage = "No user found with this email.";
+            break;
+          case "auth/wrong-password":
+            errorMessage = "Incorrect password.";
+            break;
+          default:
+            errorMessage = error.message;
+        }
+      }
+      toast.error(errorMessage);
       console.log(error);
     }
   };
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
+      <ToastContainer />
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="flex items-center justify-center w-full">
           <Link

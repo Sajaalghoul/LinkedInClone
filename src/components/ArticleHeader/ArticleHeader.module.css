@@ -3,6 +3,7 @@
   align-items: center;
   padding: 10px 20px;
   font-size: 10px;
+  flex-wrap: wrap;
 }
 .detailsNameAndDegree {
   display: flex;

@@ -12,7 +12,7 @@ const LoginNav = () => {
         />
       </Link>
       <div className={styles.NavButtons}>
-        <a className={styles.JoinNow}>  <Link to="/joinNow">Join Now</Link></a>
+       <Link  className={styles.JoinNow}  to="/joinNow">Join Now</Link>
         <button className={styles.signInButton}>
           <Link to="/signin">Sign in</Link>
         </button>

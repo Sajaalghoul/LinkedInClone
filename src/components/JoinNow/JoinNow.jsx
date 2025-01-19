@@ -3,30 +3,57 @@ import { Link, useNavigate } from "react-router-dom";
 import { registerWithEmail } from "../../APIS/AuthApi";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../state/User/UserSlice";
-
+import { toast, ToastContainer } from "react-toastify";
 const JoinNow = () => {
-  const [credintials, setCredintials] = useState({ email: "", password: "" });
+  const [credintials, setCredintials] = useState({
+    email: "",
+    password: "",
+    displayName: "",
+  });
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
       console.log(credintials);
       const result = await registerWithEmail(
         credintials.email,
-        credintials.password
+        credintials.password,
+        credintials.displayName
       );
-      dispatch(setUser({ ...result.user }));
-      console.log(result);
+      dispatch(
+        setUser({ ...result.user, displayName: credintials.displayName })
+      );
       navigate("/home");
+      toast.success("Registered successfully");
     } catch (error) {
-      console.error("Registration error:", error.message);
+      let errorMessage =
+        "Error registering. Please check your email and password.";
+      if (error.code) {
+        switch (error.code) {
+          case "auth/email-already-in-use":
+            errorMessage = "Email is already in use.";
+            break;
+          case "auth/invalid-email":
+            errorMessage = "Invalid email address.";
+            break;
+          case "auth/operation-not-allowed":
+            errorMessage = "Operation not allowed.";
+            break;
+          case "auth/weak-password":
+            errorMessage = "Password is too weak.";
+            break;
+          default:
+            errorMessage = error.message;
+        }
+      }
+      toast.error(errorMessage);
+      console.error("Registration error:", error);
     }
   };
-
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
+      <ToastContainer />
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="flex items-center justify-center w-full">
           <Link
@@ -63,6 +90,29 @@ const JoinNow = () => {
                   value={credintials.email}
                   onChange={(e) => {
                     setCredintials({ ...credintials, email: e.target.value });
+                  }}
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="Name"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Name
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="Enter Your Name"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  required=""
+                  value={credintials.displayName}
+                  onChange={(e) => {
+                    setCredintials({
+                      ...credintials,
+                      displayName: e.target.value,
+                    });
                   }}
                 />
               </div>
