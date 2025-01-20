@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import styles from "./PostModal.module.css";
+import { addPost } from "../../APIS/FireStoreApi";
 
 import { useSelector } from "react-redux";
 const PostModal = ({ handleModal }) => {
   const user = useSelector((state) => state.user.user);
   const [editorText, setEditorText] = useState("");
+
   const handleEditorText = (e) => {
     const value = e.target.value;
     setEditorText(value);
@@ -16,13 +18,24 @@ const PostModal = ({ handleModal }) => {
       reader.readAsDataURL(file);
       reader.onload = () => {
         const imageUrl = reader.result;
-        setEditorText((prev) => prev + ` <img src="${imageUrl}" alt="img" /> `);
+        // setEditorText((prev) => prev + ` <img src="${imageUrl}" alt="img" /> `);
       };
+    }
+  };
+  const handlePost = async (e) => {
+    e.preventDefault();
+    const posttext = editorText;
+    try {
+      await addPost({ text: posttext, user: user });
+      await handleModal();
+      setEditorText("");
+    } catch (error) {
+      console.error("Error adding post:", error);
     }
   };
   return (
     <div className={styles.PostModal}>
-      <div className={styles.PostModalContent}>
+      <form className={styles.PostModalContent}>
         <header className={styles.PostModalHeader}>
           <span className="flex items-center gap-3 p-2 hover:bg-slate-200 cursor-pointer rounded-lg ">
             <img
@@ -80,6 +93,8 @@ const PostModal = ({ handleModal }) => {
         </div>
         <div className="flex justify-end border-t-2 pt-2">
           <button
+            type="submit"
+            onClick={handlePost}
             className={`text-white bg-blue-500 font-bold border p-3 rounded-3xl disabled:gray ${
               editorText ? "bg-blue-500" : "bg-gray-300"
             }`}
@@ -88,7 +103,7 @@ const PostModal = ({ handleModal }) => {
             Post
           </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 };

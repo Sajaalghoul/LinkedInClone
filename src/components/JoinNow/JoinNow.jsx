@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { registerWithEmail } from "../../APIS/AuthApi";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../state/User/UserSlice";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { validationSchema } from "../../schemas/signInSchema";
+import { regiterValidationSchema } from "../../schemas/signInSchema";
+
 const JoinNow = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -52,7 +53,6 @@ const JoinNow = () => {
   };
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
-      <ToastContainer />
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="flex items-center justify-center w-full">
           <Link
@@ -73,7 +73,7 @@ const JoinNow = () => {
             </h1>
             <Formik
               initialValues={initialValues}
-              validationSchema={validationSchema}
+              validationSchema={regiterValidationSchema}
               onSubmit={handleRegister}
             >
               {({ isSubmitting }) => (

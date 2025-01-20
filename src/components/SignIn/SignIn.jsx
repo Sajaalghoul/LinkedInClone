@@ -4,9 +4,9 @@ import { signInWithEmail } from "../../APIS/AuthApi";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../state/User/UserSlice";
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import { validationSchema } from "../../schemas/signInSchema";
+import { signInValidationSchema } from "../../schemas/signInSchema";
 const SignIn = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -18,10 +18,8 @@ const SignIn = () => {
     try {
       const result = await signInWithEmail(values.email, values.password);
       dispatch(setUser({ ...result.user }));
-      toast.success("Signed in successfully", {
-        onClose: () => navigate("/home"),
-      });
-
+      toast.success("Signed in successfully");
+      navigate("/home");
       console.log(result);
     } catch (error) {
       let errorMessage =
@@ -51,7 +49,6 @@ const SignIn = () => {
   };
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
-      <ToastContainer />
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="flex items-center justify-center w-full">
           <Link
@@ -72,7 +69,7 @@ const SignIn = () => {
             </h1>
             <Formik
               initialValues={initialValues}
-              validationSchema={validationSchema}
+              validationSchema={signInValidationSchema}
               onSubmit={handleSignIn}
             >
               {({ isSubmitting }) => (
