@@ -4,26 +4,24 @@ import { registerWithEmail } from "../../APIS/AuthApi";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../state/User/UserSlice";
 import { toast, ToastContainer } from "react-toastify";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { validationSchema } from "../../schemas/signInSchema";
 const JoinNow = () => {
-  const [credintials, setCredintials] = useState({
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const initialValues = {
     email: "",
     password: "",
-    displayName: "",
-  });
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const handleRegister = async (e) => {
-    e.preventDefault();
+    name: "",
+  };
+  const handleRegister = async (values, { setSubmitting }) => {
     try {
-      console.log(credintials);
       const result = await registerWithEmail(
-        credintials.email,
-        credintials.password,
-        credintials.displayName
+        values.email,
+        values.password,
+        values.name
       );
-      dispatch(
-        setUser({ ...result.user, displayName: credintials.displayName })
-      );
+      dispatch(setUser({ ...result.user, displayName: values.displayName }));
       navigate("/home");
       toast.success("Registered successfully");
     } catch (error) {
@@ -50,6 +48,7 @@ const JoinNow = () => {
       toast.error(errorMessage);
       console.error("Registration error:", error);
     }
+    setSubmitting(false);
   };
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
@@ -72,110 +71,113 @@ const JoinNow = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Join LinkedIn Today
             </h1>
-            <form className="space-y-4 md:space-y-6" onSubmit={handleRegister}>
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Your email
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="name@company.com"
-                  required=""
-                  value={credintials.email}
-                  onChange={(e) => {
-                    setCredintials({ ...credintials, email: e.target.value });
-                  }}
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="Name"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Name
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  placeholder="Enter Your Name"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required=""
-                  value={credintials.displayName}
-                  onChange={(e) => {
-                    setCredintials({
-                      ...credintials,
-                      displayName: e.target.value,
-                    });
-                  }}
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Password
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required=""
-                  value={credintials.password}
-                  onChange={(e) => {
-                    setCredintials({
-                      ...credintials,
-                      password: e.target.value,
-                    });
-                  }}
-                />
-              </div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-start">
-                  <div className="flex items-center h-5">
-                    <input
-                      id="remember"
-                      aria-describedby="remember"
-                      type="checkbox"
-                      className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
-                      required=""
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={handleRegister}
+            >
+              {({ isSubmitting }) => (
+                <Form className="space-y-4 md:space-y-6" action="#">
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Your email
+                    </label>
+                    <Field
+                      type="email"
+                      name="email"
+                      id="email"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="name@company.com"
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component="div"
+                      className="bg-red-50 "
                     />
                   </div>
-                  <div className="ml-3 text-sm">
+                  <div>
                     <label
-                      htmlFor="remember"
-                      className="text-gray-500 dark:text-gray-300"
+                      htmlFor="password"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                     >
-                      Remember me
+                      Password
                     </label>
+                    <Field
+                      type="password"
+                      name="password"
+                      id="password"
+                      placeholder="••••••••"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    />
+                    <ErrorMessage
+                      name="password"
+                      component="div"
+                      className="bg-red-50 "
+                    />
                   </div>
-                </div>
-                <a
-                  href="#"
-                  className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
-                >
-                  Forgot password?
-                </a>
-              </div>
-              <button
-                type="submit"
-                className="w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-              >
-                Sign Up
-              </button>
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                <Link to="/signin">Sign in</Link>
-              </p>
-            </form>
+                  <div>
+                    <label
+                      htmlFor="name"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Name
+                    </label>
+                    <Field
+                      type="text"
+                      name="name"
+                      id="name"
+                      placeholder="Enter Your Name"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    />
+                    <ErrorMessage
+                      name="name"
+                      component="div"
+                      className="bg-red-50 "
+                    />
+                  </div>
+                  {/* <div className="flex items-center justify-between">
+                    <div className="flex items-start">
+                      <div className="flex items-center h-5">
+                        <input
+                          id="remember"
+                          aria-describedby="remember"
+                          type="checkbox"
+                          className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                          required=""
+                        />
+                      </div>
+                      <div className="ml-3 text-sm">
+                        <label
+                          htmlFor="remember"
+                          className="text-gray-500 dark:text-gray-300"
+                        >
+                          Remember me
+                        </label>
+                      </div>
+                    </div>
+                    <a
+                      href="#"
+                      className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
+                    >
+                      Forgot password?
+                    </a>
+                  </div> */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                  >
+                    Sign Up
+                  </button>
+                  <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                    <Link to="/signin">Sign in</Link>
+                  </p>
+                </Form>
+              )}
+            </Formik>
           </div>
         </div>
       </div>

@@ -1,27 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { signInWithEmail } from "../../APIS/AuthApi";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../state/User/UserSlice";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { validationSchema } from "../../schemas/signInSchema";
 const SignIn = () => {
-  const [credintials, setCredintials] = useState({ email: "", password: "" });
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleSignIn = async (e) => {
-    e.preventDefault();
+  const initialValues = {
+    email: "",
+    password: "",
+  };
+  const handleSignIn = async (values, { setSubmitting }) => {
     try {
-      const result = await signInWithEmail(
-        credintials.email,
-        credintials.password
-      );
-
+      const result = await signInWithEmail(values.email, values.password);
+      dispatch(setUser({ ...result.user }));
       toast.success("Signed in successfully", {
         onClose: () => navigate("/home"),
       });
-      dispatch(setUser({ ...result.user }));
+
       console.log(result);
     } catch (error) {
       let errorMessage =
@@ -47,6 +47,7 @@ const SignIn = () => {
       toast.error(errorMessage);
       console.log(error);
     }
+    setSubmitting(false);
   };
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
@@ -69,51 +70,54 @@ const SignIn = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Sign in to your account
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Your email
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  id="email"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="name@company.com"
-                  required=""
-                  value={credintials.email}
-                  onChange={(e) => {
-                    setCredintials({ ...credintials, email: e.target.value });
-                  }}
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Password
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required=""
-                  value={credintials.password}
-                  onChange={(e) => {
-                    setCredintials({
-                      ...credintials,
-                      password: e.target.value,
-                    });
-                  }}
-                />
-              </div>
-              <div className="flex items-center justify-between">
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={handleSignIn}
+            >
+              {({ isSubmitting }) => (
+                <Form className="space-y-4 md:space-y-6">
+                  <div>
+                    <label
+                      htmlFor="email"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Your email
+                    </label>
+                    <Field
+                      type="email"
+                      name="email"
+                      id="email"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="name@company.com"
+                    />
+                    <ErrorMessage
+                      name="email"
+                      component="div"
+                      className="bg-red-50 "
+                    />
+                  </div>
+                  <div>
+                    <label
+                      htmlFor="password"
+                      className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >
+                      Password
+                    </label>
+                    <Field
+                      type="password"
+                      name="password"
+                      id="password"
+                      placeholder="••••••••"
+                      className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    />
+                    <ErrorMessage
+                      name="password"
+                      component="div"
+                      className="bg-red-50 "
+                    />
+                  </div>
+                  {/* <div className="flex items-center justify-between">
                 <div className="flex items-start">
                   <div className="flex items-center h-5">
                     <input
@@ -139,18 +143,21 @@ const SignIn = () => {
                 >
                   Forgot password?
                 </a>
-              </div>
-              <button
-                type="submit"
-                onClick={handleSignIn}
-                className="w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-              >
-                Sign in
-              </button>
-              <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Don’t have an account yet? <Link to="/joinNow">Sign up</Link>
-              </p>
-            </form>
+              </div> */}
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full text-white bg-blue-500 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                  >
+                    Sign in
+                  </button>
+                  <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                    Don’t have an account yet?{" "}
+                    <Link to="/joinNow">Sign up</Link>
+                  </p>
+                </Form>
+              )}
+            </Formik>
           </div>
         </div>
       </div>
