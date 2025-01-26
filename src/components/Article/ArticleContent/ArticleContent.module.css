@@ -1,0 +1,19 @@
+.contentText {
+  padding: 20px;
+  font-size:15px;
+}
+.toggleButton {
+  margin-left: 5px;
+  color: gray;
+}
+.toggleButton:hover {
+  color: #0a66c2;
+  text-decoration: underline;
+}
+.contentMedia {
+  width: 100%;
+  border-bottom: 1px solid rgb(204, 204, 204);
+}
+.PostImage{
+  width: 100%;
+}

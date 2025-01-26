@@ -1,9 +1,11 @@
-import Login from "./components/Login/Login";
+import Login from "./components/Authentication/Login/Login";
 import App from "./App";
 import Home from "./components/Home/Home";
 import User from "./components/User/User";
-import SignIn from "./components/SignIn/SignIn";
-import JoinNow from "./components/JoinNow/JoinNow";
+import SignIn from "./components/Authentication/SignIn/SignIn";
+import JoinNow from "./components/Authentication/JoinNow/JoinNow";
+import UserProfile from "./components/User/UserProfile/UserProfile";
+import UserFormEdit from "./components/User/UserFormEdit/UserFormEdit";
 
 const routes = [
   {
@@ -16,8 +18,8 @@ const routes = [
     element: <SignIn />,
   },
   {
-    path:"joinNow", 
-    element:<JoinNow/>
+    path: "joinNow",
+    element: <JoinNow />,
   },
   {
     path: "/",
@@ -31,6 +33,10 @@ const routes = [
       {
         path: "/user",
         element: <User />,
+        children: [
+          { path: "/user", element: <UserProfile /> },
+          { path: "/user/useredit", element: <UserFormEdit /> },
+        ],
       },
     ],
   },

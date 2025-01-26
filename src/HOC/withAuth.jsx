@@ -1,17 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../config/firebase";
 
 const withAuth = (Component) => {
   const AuthenticatedComponent = (props) => {
-    const user = useSelector((state) => state.user.user);
+    const [isAuthenticated, setIsAuthenticated] = useState(null);
 
-    if (!user) {
+    useEffect(() => {
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        if (user) {
+          setIsAuthenticated(true);
+        } else {
+          setIsAuthenticated(false);
+        }
+      });
+      return () => unsubscribe();
+    }, []);
+
+    if (isAuthenticated === null) {
+      return <div>Loading...</div>;
+    }
+
+    if (!isAuthenticated) {
       return <Navigate to="/" />;
     }
-    // if (user) {
-    //   return <Navigate to="/home" />;
-    // }
+
     return <Component {...props} />;
   };
 

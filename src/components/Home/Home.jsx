@@ -1,7 +1,7 @@
 import styles from "./Home.module.css";
-import HomeLeftSide from "../HomeLeftSide/HomeLeftSide";
-import HomeMain from "../HomeMain/HomeMain";
-import HomeRightSide from "../HomeRightSide/HomeRightSide";
+import HomeLeftSide from "./HomeLeftSide/HomeLeftSide";
+import HomeMain from "../Feed/HomeMain/HomeMain";
+import HomeRightSide from "./HomeRightSide/HomeRightSide";
 const Home = () => {
   return (
     <main className={styles.Home}>

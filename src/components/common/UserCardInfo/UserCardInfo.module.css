@@ -1,0 +1,54 @@
+.UserCardWrapper {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  text-decoration: none;
+  color: black;
+  border-radius: 10px;
+}
+.CardBackground {
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 10px 10px 0 0;
+  
+}
+
+.InfoDetails {
+  display: flex;
+  flex-direction: column;
+  margin: 50px 15px 5px;
+  gap: 5px;
+}
+.Name {
+  font-size: 20px;
+}
+.location,
+.Education,
+.specialization {
+  font-size: 12px;
+}
+.location {
+  color: gray;
+}
+.eductaionSection {
+  display: flex;
+  justify-content: cenetr;
+  align-items: center;
+  gap: 5px;
+}
+.educationImg {
+  width: 20px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+}
+.Education {
+  font-weight: 550;
+}
+
+@media only screen and (max-width: 600px) {
+  .UserCardWrapper {
+    width: 100%;
+  }
+}
