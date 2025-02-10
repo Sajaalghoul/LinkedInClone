@@ -1,6 +1,6 @@
 import styles from "./ArticleContent.module.css";
 import { useState } from "react";
-const ArticleContent = ({ text, image }) => {
+const ArticleContent = ({ text, image,likesCount }) => {
   const [showMore, setShowMore] = useState(false);
   const toggleShowMore = () => {
     setShowMore((prevShowMore) => !prevShowMore);

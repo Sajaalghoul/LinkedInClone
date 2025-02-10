@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../../state/User/UserSlice";
 import { useNavigate } from "react-router-dom";
 import { signInWithGoogle } from "../../../APIS/AuthApi";
-import { addUserToStorage } from "../../../APIS/FireStoreApi";
+import { addUserToStorage } from "../../../APIS/FireStoreAPI";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();

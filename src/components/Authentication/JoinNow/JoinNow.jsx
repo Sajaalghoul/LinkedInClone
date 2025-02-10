@@ -6,7 +6,7 @@ import { setUser } from "../../../state/User/UserSlice";
 import { toast } from "react-toastify";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { regiterValidationSchema } from "../../../schemas/registerSchema";
-import { addUserToStorage } from "../../../APIS/FireStoreApi";
+import { addUserToStorage } from "../../../APIS/FireStoreAPI";
 const JoinNow = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();

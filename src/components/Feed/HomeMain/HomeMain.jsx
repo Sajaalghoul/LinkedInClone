@@ -5,7 +5,7 @@ import styles from "./HomeMain.module.css";
 import PostModal from "../../common/PostModal/PostModal";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getPosts } from "../../../APIS/FireStoreApi";
+import { getPosts } from "../../../APIS/FireStoreAPI";
 const HomeMain = () => {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();

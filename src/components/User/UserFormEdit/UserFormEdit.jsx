@@ -18,7 +18,7 @@ const UserFormEdit = () => {
     // industry: user?.industr || "",
     college: user?.college || "",
     // website: user?.website || "",
-    // about: user?.about || "",
+    about: user?.about || "",
   };
 
   const onSubmit = async (values) => {
@@ -189,7 +189,7 @@ const UserFormEdit = () => {
               />
             </div> */}
 
-            {/* <div>
+            <div>
               <label className="block text-gray-700" htmlFor="about">
                 About
               </label>
@@ -205,7 +205,7 @@ const UserFormEdit = () => {
                 component="div"
                 className="text-red-500 text-sm"
               />
-            </div> */}
+            </div>
 
             <button
               type="submit"

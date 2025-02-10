@@ -2,8 +2,7 @@ import styles from "./UserCardInfo.module.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { getCurrentUser } from "../../../APIS/FireStoreApi";
-
+import { getCurrentUser } from "../../../APIS/FireStoreAPI";
 const UserCardInfo = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);

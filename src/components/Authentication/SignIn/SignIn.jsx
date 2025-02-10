@@ -16,6 +16,7 @@ const SignIn = () => {
   };
   const handleSignIn = async (values, { setSubmitting }) => {
     try {
+      console.log(values.email, values.password);
       const result = await signInWithEmail(values.email, values.password);
       const userDate = {
         email: result.user.email,
@@ -24,7 +25,7 @@ const SignIn = () => {
         photoURL: result.user.photoURL,
       };
       dispatch(setUser(userDate));
-      localStorage.setItem("currentuser", JSON.parse(userDate));
+      localStorage.setItem("currentuser", JSON.stringify(userDate));
       toast.success("Signed in successfully");
       navigate("/home");
     } catch (error) {

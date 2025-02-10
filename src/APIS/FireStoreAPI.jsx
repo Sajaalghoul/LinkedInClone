@@ -5,11 +5,15 @@ import {
   getDocs,
   doc,
   updateDoc,
+  setDoc,
+  deleteDoc,
+  query,
+  where,
 } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { setPosts } from "../state/posts/postSlice";
 import { setUser } from "../state/User/UserSlice";
-
+// posts collection
 let postsDbRef = collection(db, "posts");
 
 export const addPostToStorage = async (post) => {
@@ -32,7 +36,7 @@ export const getPosts = async (dispatch) => {
     console.error("Error fetching posts: ", error);
   }
 };
-
+// users collection
 let usersDbRef = collection(db, "users");
 export const addUserToStorage = async (user) => {
   try {
@@ -61,7 +65,7 @@ export const getCurrentUser = async (dispatch) => {
   }
 };
 
-export const updateCurrentUser = async (updatedData,dispatch) => {
+export const updateCurrentUser = async (updatedData, dispatch) => {
   const { id } = JSON.parse(localStorage.getItem("currentuser"));
   console.log(id);
   try {
@@ -72,5 +76,55 @@ export const updateCurrentUser = async (updatedData,dispatch) => {
     toast.success("User updated successfully!");
   } catch (e) {
     toast.error("Error updating the user.");
+  }
+};
+// likes collection
+let likesDbRef = collection(db, "likes");
+
+export const likePost = async (
+  postId,
+  userId,
+  liked,
+  setLiked,
+  setLikesCount
+) => {
+  try {
+    const docId = `${userId}_${postId}`;
+    const docRef = doc(likesDbRef, docId);
+    console.log(liked);
+    if (!liked) {
+      await setDoc(docRef, { userId, postId });
+      setLikesCount((prev) => prev + 1);
+      toast.success("Post liked");
+    } else {
+      await deleteDoc(docRef);
+      setLikesCount((prev) => prev - 1);
+      toast.success("Like removed");
+    }
+    setLiked(!liked); // Move the state update here
+  } catch (e) {
+    toast.error("Error liking the post");
+    console.error("Error liking the post: ", e);
+  }
+};
+export const getLikesByUser = async (
+  userId,
+  postId,
+  setLiked,
+  setLikesCount
+) => {
+  try {
+    console.log("in get");
+    const likesQuery = query(likesDbRef, where("postId", "==", postId));
+    const querySnapshot = await getDocs(likesQuery);
+    const likes = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    setLikesCount(likes.length);
+    const isLiked = likes.some((like) => like.userId === userId);
+    setLiked(isLiked);
+  } catch (error) {
+    console.error("Error fetching likes: ", error);
   }
 };

@@ -9,5 +9,5 @@ export const userValidationSchema = Yup.object({
   // industry: Yup.string().required("Industry is required"),
   college: Yup.string().required("College is required"),
   // website: Yup.string().url("Invalid URL format"),
-  // about: Yup.string().required("About is required"),
+  about: Yup.string().required("About is required"),
 });
