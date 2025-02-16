@@ -1,8 +1,26 @@
 import styles from "./ArticleActions.module.css";
+import CommentSection from "./CommentSection/CommentSection";
 import LikeButton from "./LikeButton/LikeButton";
 import { useState } from "react";
-const ArticleActions = ({postId,userId}) => {
-    const [likesCount, setLikesCount] = useState(0);
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getComments } from "../../../APIS/FireStoreAPI";
+
+const ArticleActions = ({ postId, userId }) => {
+  const [likesCount, setLikesCount] = useState(0);
+  const [commentShow, setCommentShow] = useState(false);
+  const comments = useSelector((state) => state.comments.comments).filter(
+    (comment) => comment.postId === postId
+  );
+  const dispatch = useDispatch();
+
+  const toggleCommentSection = () => {
+    setCommentShow((prev) => !prev);
+  };
+  useEffect(() => {
+    getComments(dispatch);
+  }, [dispatch]);
+
   return (
     <>
       <div className={styles.articleActionsNumber}>
@@ -16,8 +34,12 @@ const ArticleActions = ({postId,userId}) => {
         <p className={styles.repostsNumber}>90 reposts</p>
       </div>
       <div className={styles.articlActions}>
-        <LikeButton postId={postId} userId={userId} setLikesCount={setLikesCount}/>
-        <button className={styles.Action}>
+        <LikeButton
+          postId={postId}
+          userId={userId}
+          setLikesCount={setLikesCount}
+        />
+        <button className={styles.Action} onClick={toggleCommentSection}>
           <img
             src="../../assets/images/comment.svg"
             alt="commentIcon"
@@ -42,6 +64,21 @@ const ArticleActions = ({postId,userId}) => {
           <p className={styles.ActionTitle}>send</p>
         </button>
       </div>
+      {commentShow ? (
+        <CommentSection
+          postId={postId}
+          toggleCommentSection={toggleCommentSection}
+        />
+      ) : (
+        <ul>
+          {comments.map((comment) => (
+            <li key={comment.id}>
+              <p>{comment.text}</p>
+              <p>{comment.user.displayName}</p>
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 };

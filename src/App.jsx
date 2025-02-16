@@ -8,7 +8,6 @@ import { setUser } from "./state/User/UserSlice";
 function App() {
   const dispatch = useDispatch();
   const userDate = JSON.parse(localStorage.getItem("currentuser"));
-  console.log(userDate);
   useEffect(() => {
     dispatch(setUser(userDate));
   }, [dispatch]);

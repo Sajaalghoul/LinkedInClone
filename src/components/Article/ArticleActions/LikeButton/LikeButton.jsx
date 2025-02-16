@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getLikesByUser, likePost } from "../../../../APIS/FireStoreAPI";
+import { getLikesByUser, likePost } from "../../../../APIS/FireStoreAPI.jsx";
 
 const LikeButton = ({ postId, userId, setLikesCount }) => {
   const [liked, setLiked] = useState(false);

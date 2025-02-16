@@ -13,6 +13,7 @@ import {
 import { toast } from "react-toastify";
 import { setPosts } from "../state/posts/postSlice";
 import { setUser } from "../state/User/UserSlice";
+import { setComments } from "../state/comments/commentSlice";
 // posts collection
 let postsDbRef = collection(db, "posts");
 
@@ -40,7 +41,7 @@ export const getPosts = async (dispatch) => {
 let usersDbRef = collection(db, "users");
 export const addUserToStorage = async (user) => {
   try {
-    const docRef = await addDoc(usersDbRef, user);
+    await addDoc(usersDbRef, user);
     toast.success("user added Successfulty");
   } catch (e) {
     toast.error("Error adding the user");
@@ -59,7 +60,6 @@ export const getCurrentUser = async (dispatch) => {
       .filter((doc) => doc.email === email)[0];
     localStorage.setItem("currentuser", JSON.stringify(currentUser));
     dispatch(setUser(currentUser));
-    // toast.success("user get Successfulty");
   } catch (e) {
     toast.error("Error getting the user");
   }
@@ -126,5 +126,28 @@ export const getLikesByUser = async (
     setLiked(isLiked);
   } catch (error) {
     console.error("Error fetching likes: ", error);
+  }
+};
+// // comments collection
+let commentsDbRef = collection(db, "comments");
+
+export const addCommentToStorage = async (comment) => {
+  try {
+    await addDoc(commentsDbRef, comment);
+    toast.success("comment added Successfulty");
+  } catch (e) {
+    toast.error("Error adding the comment");
+  }
+};
+export const getComments = async (dispatch) => {
+  try {
+    const querySnapshot = await getDocs(commentsDbRef);
+    const comments = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    dispatch(setComments(comments));
+  } catch (error) {
+    console.error("Error fetching comments: ", error);
   }
 };
