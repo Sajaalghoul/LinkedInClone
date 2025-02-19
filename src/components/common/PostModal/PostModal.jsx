@@ -1,16 +1,18 @@
 import React from "react";
 import styles from "./PostModal.module.css";
-import { addPostToStorage } from "../../../APIS/FireStoreApi";
-import { addPost } from "../../../state/posts/postSlice";
+import { addPostToStorage ,editPostFromStorage} from "../../../APIS/FireStoreAPI";
+import { addPost,editPost } from "../../../state/posts/postSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { postValidationSchema } from "../../../schemas/postSchema";
 
-const PostModal = ({ handleModal }) => {
+const PostModal = ({ handleModal, postId, prevText, prevImage }) => {
+  console.log(prevImage);
   const user = useSelector((state) => state.user.user);
+  const posts = useSelector((state) => state.post.posts);
   const initialValues = {
-    editorText: "",
-    chosenImage: undefined,
+    editorText: prevText || "",
+    chosenImage: prevImage || "",
   };
   const dispatch = useDispatch();
 
@@ -23,15 +25,23 @@ const PostModal = ({ handleModal }) => {
 
   const handlePost = async (values, { setSubmitting }) => {
     const post = {
-      id: Math.random().toString(36),
       text: values.editorText,
       image: values.chosenImage,
       user: user,
       timePosted: new Date().toISOString(),
     };
+
     console.log(post);
-    await addPostToStorage(post);
-    dispatch(addPost(post));
+    //if posts exists in posts=edit post
+    //else add post
+    if (posts.filter((post) => post.id === postId).length > 0) {
+      await editPostFromStorage(postId,post);
+      dispatch(editPost({ id: postId, ...post }));
+    } else {
+      const docId = await addPostToStorage(post);
+      console.log("this is docid",docId);
+      dispatch(addPost({ id: docId, ...post }));
+    }
     await handleModal();
     setSubmitting(false);
   };
@@ -59,6 +69,7 @@ const PostModal = ({ handleModal }) => {
               <img
                 src="../../assets/images/close.svg"
                 alt="close"
+                value={prevImage}
                 className="w-6 cursor-pointer hover:rounded-md  hover:bg-gray-200"
                 onClick={handleModal}
               />

@@ -14,10 +14,19 @@ const postSlice = createSlice({
     addPost: (state, action) => {
       state.posts.push(action.payload);
     },
+    editPost: (state, action) => {
+      console.log(state.posts[0])
+      const index = state.posts.findIndex(
+        (post) => post.id === action.payload.id
+      );
+      if (index !== -1) {
+        state.posts[index] = { ...state.posts[index], ...action.payload };
+      }
+    },
     deletePost: (state, action) => {
       state.posts = state.posts.filter((post) => post.id !== action.payload);
     },
   },
 });
-export const { setPosts,addPost } = postSlice.actions;
+export const { setPosts, addPost, deletePost, editPost } = postSlice.actions;
 export default postSlice.reducer;

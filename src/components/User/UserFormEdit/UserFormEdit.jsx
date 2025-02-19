@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { userValidationSchema } from "../../../schemas/userProfileSchema";
 import { useDispatch, useSelector } from "react-redux";
-import { updateCurrentUser } from "../../../APIS/FireStoreApi";
+import { updateCurrentUser } from "../../../APIS/FireStoreAPI";
 import { useNavigate } from "react-router-dom";
 
 const UserFormEdit = () => {
@@ -14,10 +14,7 @@ const UserFormEdit = () => {
     headline: user?.headline || "",
     country: user?.country || "",
     city: user?.city || "",
-    // company: user?.company || "",
-    // industry: user?.industr || "",
     college: user?.college || "",
-    // website: user?.website || "",
     about: user?.about || "",
   };
 
@@ -25,7 +22,7 @@ const UserFormEdit = () => {
     console.log("hye",values);
     try {
       console.log("submitted");
-      await updateCurrentUser(values,dispatch); // Ensure this function works as expected
+      await updateCurrentUser(values,dispatch); 
       navigate("/user");
     } catch (error) {
       console.error("Error updating user:", error);

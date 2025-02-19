@@ -28,7 +28,6 @@ const JoinNow = () => {
       };
       dispatch(setUser(userDate));
       await addUserToStorage(userDate);
-      console.log(userDate);
       localStorage.setItem("currentuser", JSON.stringify(userDate));
       navigate("/home");
       toast.success("Registered successfully");

@@ -4,26 +4,33 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../../../state/User/UserSlice";
 import { useNavigate } from "react-router-dom";
 import { signInWithGoogle } from "../../../APIS/AuthApi";
-import { addUserToStorage } from "../../../APIS/FireStoreAPI";
+import {
+  addUserToStorage,
+  checkUserExistsInStorage,
+} from "../../../APIS/FireStoreAPI";
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleGoogle = async () => {
     try {
       const result = await signInWithGoogle();
+      console.log(result.user);
       const userData = {
         uid: result.user.uid,
         email: result.user.email,
         displayName: result.user.displayName,
         photoURL: result.user.photoURL,
       };
-      dispatch(setUser(userData));
-      await addUserToStorage({
-        email: result.user.email,
-        displayName: result.user.displayName,
-        photoURL: result.user.photoURL,
-      });
       console.log(userData);
+      dispatch(setUser(userData));
+      const userExists = await checkUserExistsInStorage(result.user.uid);
+      if (!userExists) {
+        await addUserToStorage({
+          email: result.user.email,
+          displayName: result.user.displayName,
+          photoURL: result.user.photoURL,
+        });
+      }
       localStorage.setItem("currentuser", JSON.stringify(userData));
       navigate("/home");
       alert("Signed in successfully with Google");

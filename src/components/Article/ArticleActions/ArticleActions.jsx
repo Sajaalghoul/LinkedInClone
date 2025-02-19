@@ -13,7 +13,6 @@ const ArticleActions = ({ postId, userId }) => {
     (comment) => comment.postId === postId
   );
   const dispatch = useDispatch();
-
   const toggleCommentSection = () => {
     setCommentShow((prev) => !prev);
   };
@@ -70,11 +69,14 @@ const ArticleActions = ({ postId, userId }) => {
           toggleCommentSection={toggleCommentSection}
         />
       ) : (
-        <ul>
+        <ul className="m-2 p-2   flex flex-col gap-2">
           {comments.map((comment) => (
-            <li key={comment.id}>
-              <p>{comment.text}</p>
-              <p>{comment.user.displayName}</p>
+            <li key={comment.id} className="flex flex-col gap-2 bg-slate-50 p-1">
+              <div className="flex justify-between">
+                <p>{comment.user.displayName}</p>
+                <p>{comment.timePosted}</p>
+              </div>
+              <p className="m-2">{comment.text}</p>
             </li>
           ))}
         </ul>

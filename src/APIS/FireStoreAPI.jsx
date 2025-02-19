@@ -6,6 +6,7 @@ import {
   doc,
   updateDoc,
   setDoc,
+  getDoc,
   deleteDoc,
   query,
   where,
@@ -20,7 +21,8 @@ let postsDbRef = collection(db, "posts");
 export const addPostToStorage = async (post) => {
   try {
     const docRef = await addDoc(postsDbRef, post);
-    toast.success("post added Successfulty");
+    toast.success("Post added successfully");
+    return docRef.id;
   } catch (e) {
     toast.error("Error adding the post");
   }
@@ -37,9 +39,29 @@ export const getPosts = async (dispatch) => {
     console.error("Error fetching posts: ", error);
   }
 };
+export const editPostFromStorage=async(id,updatedData)=>{
+  try { 
+    const postDocRef = doc(postsDbRef, id);
+    await updateDoc(postDocRef, updatedData);
+    toast.success("Post updated successfully!");
+  } catch (e) {
+    toast.error("Error updating the post.");
+}}
+
+export const deletePostFromStorage = async (postId) => {
+  console.log(postId);
+  try {
+    const postDocRef = doc(postsDbRef, postId);
+    await deleteDoc(postDocRef);
+    toast.success("Post deleted successfully!");
+  } catch (e) {
+    toast.error("Error deleting the post.");
+  }
+};
 // users collection
 let usersDbRef = collection(db, "users");
 export const addUserToStorage = async (user) => {
+  console.log(user);
   try {
     await addDoc(usersDbRef, user);
     toast.success("user added Successfulty");
@@ -67,7 +89,6 @@ export const getCurrentUser = async (dispatch) => {
 
 export const updateCurrentUser = async (updatedData, dispatch) => {
   const { id } = JSON.parse(localStorage.getItem("currentuser"));
-  console.log(id);
   try {
     const userDocRef = doc(usersDbRef, id);
     await updateDoc(userDocRef, updatedData);
@@ -149,5 +170,16 @@ export const getComments = async (dispatch) => {
     dispatch(setComments(comments));
   } catch (error) {
     console.error("Error fetching comments: ", error);
+  }
+};
+
+export const checkUserExistsInStorage = async (uid) => {
+  const userRef = doc(db, "users", uid);
+  try {
+    const userSnap = await getDoc(userRef);
+    return userSnap.exists();
+  } catch (error) {
+    console.error("Error checking user existence: ", error);
+    return false;
   }
 };

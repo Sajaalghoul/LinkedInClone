@@ -16,11 +16,9 @@ const SignIn = () => {
   };
   const handleSignIn = async (values, { setSubmitting }) => {
     try {
-      console.log(values.email, values.password);
       const result = await signInWithEmail(values.email, values.password);
       const userDate = {
         email: result.user.email,
-        password: result.user.email,
         displayName: result.user.displayName,
         photoURL: result.user.photoURL,
       };

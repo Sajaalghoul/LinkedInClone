@@ -1,6 +1,6 @@
 import styles from "./ArticleContent.module.css";
 import { useState } from "react";
-const ArticleContent = ({ text, image,likesCount }) => {
+const ArticleContent = ({ text, image }) => {
   const [showMore, setShowMore] = useState(false);
   const toggleShowMore = () => {
     setShowMore((prevShowMore) => !prevShowMore);
@@ -18,9 +18,11 @@ const ArticleContent = ({ text, image,likesCount }) => {
           </button>
         )}
       </div>
-      <div className={styles.contentMedia}>
-        <img src={image} alt="articleImage" className={styles.PostImage} />
-      </div>
+      {image && (
+        <div className={styles.contentMedia}>
+          <img src={image} alt="articleImage" className={styles.PostImage} />
+        </div>
+      )}
     </div>
   );
 };
