@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { signInWithEmail } from "../../../APIS/AuthApi";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../../state/User/UserSlice";
+import { setUser } from "../../../state/user/userSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Formik, Form, Field, ErrorMessage } from "formik";
