@@ -2,7 +2,7 @@ import styles from "./Header.module.css";
 import navigatores from "../../../navigatores";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { setUser } from "../../../state/User/UserSlice";
+import { setUser } from "../../../state/user/userSlice";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { signOutUser } from "../../../APIS/AuthApi";
