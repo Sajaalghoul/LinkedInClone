@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./User/UserSlice";
+import userReducer from "./user/userSlice";
 import postReducer from "./posts/postSlice";
 import commentReducer from "./comments/commentSlice";
 export const store = () =>
