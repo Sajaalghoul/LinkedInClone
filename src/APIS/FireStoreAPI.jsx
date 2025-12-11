@@ -13,7 +13,7 @@ import {
 } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { setPosts } from "../state/posts/postSlice";
-import { setUser } from "../state/User/UserSlice";
+import { setUser } from "../state/user/userSlice";
 import { setComments } from "../state/comments/commentSlice";
 // posts collection
 let postsDbRef = collection(db, "posts");
