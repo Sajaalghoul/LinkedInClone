@@ -1,7 +1,7 @@
 import LoginNav from "../LoginNav/LoginNav";
 import styles from "./Login.module.css";
 import { useDispatch } from "react-redux";
-import { setUser } from "../../../state/User/UserSlice";
+import { setUser } from "../../../state/user/userSlice";
 import { useNavigate } from "react-router-dom";
 import { signInWithGoogle } from "../../../APIS/AuthApi";
 import {
