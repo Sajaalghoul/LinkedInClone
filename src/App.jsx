@@ -4,7 +4,7 @@ import "./App.css";
 import Header from "./components/common/Header/Header";
 import withAuth from "./HOC/withAuth";
 import { useDispatch } from "react-redux";
-import { setUser } from "./state/User/UserSlice";
+import { setUser } from "./state/uer/userSlice";
 function App() {
   const dispatch = useDispatch();
   const userDate = JSON.parse(localStorage.getItem("currentuser"));
